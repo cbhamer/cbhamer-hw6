@@ -101,4 +101,4 @@ class DTree:
                 return False
             return dfs(node.lessequal, node.variable) and dfs(node.greater, node.variable)
 
-    return dfs(self)
+        return dfs(self)
