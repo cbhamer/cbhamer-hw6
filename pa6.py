@@ -57,7 +57,7 @@ class DTree:
     doc...
     """
     def __init__(self, variable, threshold, lessequal, greater, outcome):
-        if (variable is None and threshold is None and lessequal is None and greater is None) is not (outcome is None):
+        if (variable is not None and threshold is not None and lessequal is not None and greater is not None) is not (outcome is None):
             raise ValueError("Either first four arguments or the outcome should not be none, but not both.")
         self.variable = variable
         self.threshold = threshold
