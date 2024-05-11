@@ -2,7 +2,8 @@
 
 def make_change(total):
     """
-    doc...
+    This function takes a coin value and returns the different combinations that 
+    coins can add to total amount
     """
     coins = [1, 5, 10, 25, 100]
     combos = []
@@ -24,7 +25,9 @@ def make_change(total):
 
 def dict_filter(func, dic):
     """
-    doc....
+    This function takes a function and a dictionary, then returns a new dictionary 
+    where a key,value pair remains with each other if the function returns true
+    when it calls the pair
     """
     new_dic = {}
     for key, val in dic.items():
@@ -34,7 +37,7 @@ def dict_filter(func, dic):
 
 class KVTree:
     """
-    doc...
+    This class designs a tree filled with children
     """
     def __init__(self, key, value):
         self.key = key
@@ -46,7 +49,8 @@ class KVTree:
 
 def treemap(func, tree):
     """
-    doc...
+    This function takes a function and a tree, then returns a modified version of the 
+    tree that changes the values of each child based on the function
     """
     tree.key, tree.value = func(tree.key, tree.value)
     for child in tree.children:
@@ -54,7 +58,8 @@ def treemap(func, tree):
 
 class DTree:
     """
-    doc...
+    This class designs a flow chart for someone's though-process while making a 
+    decision
     """
     def __init__(self, variable, threshold, lessequal, greater, outcome):
         if (variable is not None and threshold is not None and lessequal is not None and greater is not None) is not (outcome is None):
@@ -67,7 +72,7 @@ class DTree:
 
     def tuple_atleast(self):
         """
-        doc...
+        This method determines how many entries there need to be in the tuple
         """
         max_var = 0
         if self.lessequal:
@@ -80,7 +85,8 @@ class DTree:
 
     def find_outcome(self, observations):
         """
-        doc...
+        This method takes in a tuple with observations and navigates through the 
+        tree to provide the outcome that matches
         """
         if self.outcome is not None:
             return self.outcome
@@ -92,13 +98,14 @@ class DTree:
 
     def no_repeats(self):
         """
-        doc...
+        This method returns True if and only if there are not “repeats”, 
+        False otherwise.
         """
-        def dfs(node, last_variable=None):
+        def helper_repeat(node, last_variable=None):
             if node is None:
                 return True
             if node.variable == last_variable:
                 return False
-            return dfs(node.lessequal, node.variable) and dfs(node.greater, node.variable)
+            return helper_repeat(node.lessequal, node.variable) and helper_repeat(node.greater, node.variable)
 
-        return dfs(self)
+        return helper_repeat(self)
