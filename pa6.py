@@ -7,7 +7,7 @@ def make_change(total):
     coins = [1, 5, 10, 25, 100]
     combos = []
     
-    def backtrack(remaining, current_combo, start_index):
+    def helper(remaining, current_combo, start_index):
         if remaining == 0:
             combos.append(current_combo[:])
             return
@@ -15,10 +15,10 @@ def make_change(total):
             coin = coins[i]
             if coin <= remaining:
                 current_combo.append(coin)
-                backtrack(remaining - coin, current_combo, i)
+                helper(remaining - coin, current_combo, i)
                 current_combo.pop()
     
-    backtrack(total, [], 0)
+    helper(total, [], 0)
     
     return combos
 
@@ -94,14 +94,11 @@ class DTree:
         """
         doc...
         """
-        seen_variables = set()
-
-        def helper(node):
+        def dfs(node, last_variable=None):
             if node is None:
                 return True
-            if node.variable in seen_variables:
+            if node.variable == last_variable:
                 return False
-            seen_variables.add(node.variable)
-            return helper(node.lessequal) and helper(node.greater)
+            return dfs(node.lessequal, node.variable) and dfs(node.greater, node.variable)
 
-        return helper(self)
+    return dfs(self)
